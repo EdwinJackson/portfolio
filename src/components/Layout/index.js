@@ -65,7 +65,6 @@ function Layout({ children }) {
         <>
           <Helmet title={data.site.siteMetadata.title}>
             <html lang="en" />
-            <link href="https://fonts.googleapis.com/css?family=Inconsolata|Karla" rel="stylesheet" />
           </Helmet>
           <Navbar />
           <Divider />

@@ -36,23 +36,21 @@ const Navbar = () => (
   <StaticQuery
     query={graphql`
     {
-      allContentfulPerson {
-        edges {
-          node {
-            id
-            name
-            email
-            phone
-            image {
-              file {
-                url
-              }
-            }
-            shortBio {
-              childMarkdownRemark {
-                rawMarkdownBody
-              }
-            }
+      contentfulPerson(id: {eq: "3c56de93-d279-5889-8563-5298ad412080"}) {
+        name
+        title
+        email
+        phone
+        github
+        image {
+          description
+          file {
+            url
+          }
+        }
+        shortBio {
+          childMarkdownRemark {
+            rawMarkdownBody
           }
         }
       }
@@ -67,7 +65,7 @@ const Navbar = () => (
     }
     `}
     render={data => {
-      const {node: person} = data.allContentfulPerson.edges[0]; // This site is designed to be about a single person
+      const person = data.contentfulPerson;
       const {node: navitems} = data.allContentfulNavigationItem.edges.map(({node}) => ({...node}));
       console.log(navitems);
       return (
