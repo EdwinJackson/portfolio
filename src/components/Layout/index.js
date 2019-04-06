@@ -6,58 +6,31 @@ import { StaticQuery, graphql } from 'gatsby';
 import Navbar from './navbar';
 
 const Content = styled.main`
-  padding: 20px;
-  margin: auto;
+  max-width: 700px;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  margin-left: calc(37vw + 2rem);
 
-  & > h2 {
-    font-size: 28px;
-    font-weight: bold;
+  @media (min-width: 1440px) {
+    margin-left: 45vw;
   }
 
   & > section {
-    background: #fff;
-    padding: 40px 30px;
-    margin: 2rem 2rem 0 25vw;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-      background: #fff;
-      transform: rotate(-2deg);
-      z-index: -1;
-    }
-  }
-
-  & > section > h1 {
-    font-size: 24px;
-  }
-
-  & > section > h2 {
-    font-size: 21px;
-  }
-
-  & > section > p {
-    line-height: 1.6;
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
-
-  & > section > img {
-    max-width: 100%;
-    height: auto;
+    margin: 0 auto 5rem;
   }
 `;
 
 const Divider = styled.div`
+  position: fixed;
   width: 1px;
-  height: 100vh;
+  height: 90vh;
   margin-left: 33vw;
   background: linear-gradient(to bottom, #2E294E, #FFF);
+
+  @media (min-width: 1500px) {
+    margin-left: 40vw;
+  }
 `;
 
 function Layout({ children, person, navitems }) {

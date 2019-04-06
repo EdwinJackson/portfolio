@@ -4,8 +4,13 @@ import styled from 'styled-components';
 const SideBar = styled.nav`
   position: fixed;
   width: 25vw;
+  max-width: 500px;
   height: 100vh;
   padding: 2rem;
+
+  @media (min-width: 1500px) {
+    margin-left: calc(40vw - 500px);
+  }
 `;
 
 const Image = styled.img`
@@ -24,7 +29,7 @@ const HeaderOne = styled.h1`
   font-size: 1.5rem;
   font-family: 'Karla', monospace;
   font-weight: bold;
-`
+`;
 
 const Navbar = ({person, navitems}) => (
   <SideBar>
