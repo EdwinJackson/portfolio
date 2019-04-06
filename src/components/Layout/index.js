@@ -33,7 +33,7 @@ const Divider = styled.div`
   }
 `;
 
-function Layout({ children, person, navitems }) {
+function Layout({ children }) {
   injectGlobal`
 		${reset}
 
@@ -67,7 +67,7 @@ function Layout({ children, person, navitems }) {
             <html lang="en" />
             <link href="https://fonts.googleapis.com/css?family=Inconsolata|Karla" rel="stylesheet" />
           </Helmet>
-          <Navbar {...{person, navitems}} />
+          <Navbar />
           <Divider />
           <Content>{children}</Content>
         </>
