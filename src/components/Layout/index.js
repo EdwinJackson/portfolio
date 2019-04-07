@@ -14,7 +14,7 @@ const Content = styled.main`
   margin-left: calc(37vw + 2rem);
 
   ${media.desktopSmall} {
-    margin-left: 45vw;
+    margin-left: 35vw;
   }
 
   & > section {
@@ -26,7 +26,7 @@ const Divider = styled.div`
   position: fixed;
   width: 1px;
   height: 90vh;
-  margin-left: 33vw;
+  margin-left: 30vw;
   background: linear-gradient(to bottom, ${colour.space}, ${colour.white});
 
   ${media.desktopLarge} {
