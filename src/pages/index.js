@@ -5,8 +5,8 @@ import Experience from '../components/container/experience';
 
 const HomePage = () => (
   <Layout>
-    <About id="about" />
-    <Experience id="experience" />
+    <About />
+    <Experience />
   </Layout>
 );
 
