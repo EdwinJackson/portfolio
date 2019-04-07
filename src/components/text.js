@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { colour } from '../common/styles';
 
 const SectionHeader = styled.h2`
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  color: ${props => props.diminished ? 'rgba(52, 52, 52, 0.5)' : '#343434' };
+  color: ${props => props.diminished ? colour.diminishedBlack : colour.black };
 `;
 
 const ItemHeader = styled.h3`
