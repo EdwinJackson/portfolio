@@ -2,6 +2,7 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Image from '../image';
+import { space, colour } from '../../common/styles';
 
 const SideBar = styled.nav`
   position: fixed;
@@ -31,6 +32,44 @@ const HeaderOne = styled.h1`
   font-weight: bold;
 `;
 
+const Navigation = styled.ul`
+  width: 100px;
+  margin: 4rem auto;
+  list-style-type: none;
+
+  li {
+    position: relative;
+    margin-bottom: 1.5rem;
+    font-family: 'Karla', sans-serif;
+    font-size: 1.25;
+    font-weight: bold;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 1rem;
+      height: 3px;
+      margin-bottom: -5px;
+      background: ${colour.powder};
+      transition: ease-in 100ms all;
+    }
+
+    &:hover {
+      &::before {
+        width: 4rem;
+        background: ${colour.pale};        
+      }
+    }
+  }
+
+  a {
+    color: ${colour.black};
+    text-decoration: none;
+  }
+`;
+
 const Navbar = () => (
   <StaticQuery
     query={graphql`
@@ -53,7 +92,7 @@ const Navbar = () => (
           }
         }
       }
-      allContentfulNavigationItem {
+      allContentfulNavigationItem(sort: {fields: createdAt, order: ASC}) {
         edges {
           node {
             text
@@ -66,11 +105,17 @@ const Navbar = () => (
     render={data => {
       const person = data.contentfulPerson;
       const navitems = data.allContentfulNavigationItem.edges.map(({node}) => ({...node}));
-      console.log(navitems);
       return (
         <SideBar>
           <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
           <HeaderOne>{person.name}</HeaderOne>
+          <Navigation>
+            {navitems.map(item => (
+              <li key={item.link}>
+                <a href={item.link}>{item.text}</a>
+              </li>
+            ))}
+          </Navigation>
         </SideBar>
       )
     }}
