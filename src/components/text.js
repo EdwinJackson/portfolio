@@ -8,7 +8,7 @@ const SectionHeader = styled.h2`
 `;
 
 const ItemHeader = styled.h3`
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: bold;
 `;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
+import Image from '../image';
 
 const SideBar = styled.nav`
   position: fixed;
@@ -14,10 +15,8 @@ const SideBar = styled.nav`
   }
 `;
 
-const Image = styled.img`
+const Headshot = styled(Image)`
   display: block;
-  height: ${props => props.size}rem;
-  width: ${props => props.size}rem;
   border-radius: 50%;
   margin: 1rem auto;
   object-fit: cover;
@@ -66,11 +65,11 @@ const Navbar = () => (
     `}
     render={data => {
       const person = data.contentfulPerson;
-      const {node: navitems} = data.allContentfulNavigationItem.edges.map(({node}) => ({...node}));
+      const navitems = data.allContentfulNavigationItem.edges.map(({node}) => ({...node}));
       console.log(navitems);
       return (
         <SideBar>
-          <Image size={10} src={person.image.file.url} alt="Edwin"/>
+          <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
           <HeaderOne>{person.name}</HeaderOne>
         </SideBar>
       )
