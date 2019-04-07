@@ -2,16 +2,16 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Image from '../image';
-import { space, colour } from '../../common/styles';
+import { space, colour, media } from '../../common/styles';
 
 const SideBar = styled.nav`
   position: fixed;
-  width: 25vw;
-  max-width: 500px;
+  width: ${space.sidebar};
+  max-width: ${space.sidebarMax};
   height: 100vh;
   padding: 2rem;
 
-  @media (min-width: 1500px) {
+  ${media.desktopLarge} {
     margin-left: calc(40vw - 500px);
   }
 `;

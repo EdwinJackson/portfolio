@@ -4,7 +4,7 @@ import reset from 'styled-reset';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import Navbar from './navbar';
-import { colour } from '../../common/styles';
+import { colour, media } from '../../common/styles';
 
 const Content = styled.main`
   max-width: 700px;
@@ -13,7 +13,7 @@ const Content = styled.main`
   margin-right: 2rem;
   margin-left: calc(37vw + 2rem);
 
-  @media (min-width: 1440px) {
+  ${media.desktopSmall} {
     margin-left: 45vw;
   }
 
@@ -29,7 +29,7 @@ const Divider = styled.div`
   margin-left: 33vw;
   background: linear-gradient(to bottom, ${colour.space}, ${colour.white});
 
-  @media (min-width: 1500px) {
+  ${media.desktopLarge} {
     margin-left: 40vw;
   }
 `;
