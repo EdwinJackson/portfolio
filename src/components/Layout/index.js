@@ -16,10 +16,6 @@ const Content = styled.main`
   ${media.desktopSmall} {
     margin-left: 35vw;
   }
-
-  & > section {
-    margin: 0 auto 5rem;
-  }
 `;
 
 const Divider = styled.div`
