@@ -73,7 +73,7 @@ const Experience = () => (
       // dig into the node object and flatten it
       const experiences = allContentfulExperience.edges.map(({node}) => ({...node}));
       return (
-        <Section>
+        <Section id="experiences">
           <SectionHeader diminished>Experience</SectionHeader>
           {experiences.map(experience => (
             <ExperienceContainer key={experience.id}>
