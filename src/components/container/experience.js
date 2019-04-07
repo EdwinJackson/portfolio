@@ -72,7 +72,6 @@ const Experience = () => (
     render={({allContentfulExperience}) => {
       // dig into the node object and flatten it
       const experiences = allContentfulExperience.edges.map(({node}) => ({...node}));
-      console.log(experiences);
       return (
         <Section>
           <SectionHeader diminished>Experience</SectionHeader>
