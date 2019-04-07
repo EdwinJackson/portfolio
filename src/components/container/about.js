@@ -1,8 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
-import Section from '../Layout/section';
-import { SectionHeader, Body } from '../../common/text';
+import Section from '../section';
+import { SectionHeader, Body } from '../text';
 
 const About = () => (
   <StaticQuery 

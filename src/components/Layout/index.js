@@ -4,6 +4,7 @@ import reset from 'styled-reset';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import Navbar from './navbar';
+import { colour } from '../../common/styles';
 
 const Content = styled.main`
   max-width: 700px;
@@ -26,7 +27,7 @@ const Divider = styled.div`
   width: 1px;
   height: 90vh;
   margin-left: 33vw;
-  background: linear-gradient(to bottom, #2E294E, #FFF);
+  background: linear-gradient(to bottom, ${colour.space}, ${colour.white});
 
   @media (min-width: 1500px) {
     margin-left: 40vw;
@@ -39,8 +40,17 @@ function Layout({ children }) {
 
 		body {
 			font-family: 'Inconsolata', monospace;
-      color: #343434;
+      color: ${colour.black};
 		}
+
+    h1, h2, h3, h4, p, span, a, li {
+      &::selection {
+        background: ${colour.pale}; /* WebKit/Blink Browsers */
+      }
+      &::-moz-selection {
+        background: ${colour.pale}; /* Gecko Browsers */
+      }
+    }
 
     h1,
     h2,

@@ -1,6 +1,8 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
+import Image from '../image';
+import { space, colour } from '../../common/styles';
 
 const SideBar = styled.nav`
   position: fixed;
@@ -14,10 +16,8 @@ const SideBar = styled.nav`
   }
 `;
 
-const Image = styled.img`
+const Headshot = styled(Image)`
   display: block;
-  height: ${props => props.size}rem;
-  width: ${props => props.size}rem;
   border-radius: 50%;
   margin: 1rem auto;
   object-fit: cover;
@@ -30,6 +30,44 @@ const HeaderOne = styled.h1`
   font-size: 1.5rem;
   font-family: 'Karla', monospace;
   font-weight: bold;
+`;
+
+const Navigation = styled.ul`
+  width: 100px;
+  margin: 4rem auto;
+  list-style-type: none;
+
+  li {
+    position: relative;
+    margin-bottom: 1.5rem;
+    font-family: 'Karla', sans-serif;
+    font-size: 1.25;
+    font-weight: bold;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 1rem;
+      height: 3px;
+      margin-bottom: -5px;
+      background: ${colour.powder};
+      transition: ease-in 100ms all;
+    }
+
+    &:hover {
+      &::before {
+        width: 4rem;
+        background: ${colour.pale};        
+      }
+    }
+  }
+
+  a {
+    color: ${colour.black};
+    text-decoration: none;
+  }
 `;
 
 const Navbar = () => (
@@ -54,7 +92,7 @@ const Navbar = () => (
           }
         }
       }
-      allContentfulNavigationItem {
+      allContentfulNavigationItem(sort: {fields: createdAt, order: ASC}) {
         edges {
           node {
             text
@@ -66,12 +104,18 @@ const Navbar = () => (
     `}
     render={data => {
       const person = data.contentfulPerson;
-      const {node: navitems} = data.allContentfulNavigationItem.edges.map(({node}) => ({...node}));
-      console.log(navitems);
+      const navitems = data.allContentfulNavigationItem.edges.map(({node}) => ({...node}));
       return (
         <SideBar>
-          <Image size={10} src={person.image.file.url} alt="Edwin"/>
+          <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
           <HeaderOne>{person.name}</HeaderOne>
+          <Navigation>
+            {navitems.map(item => (
+              <li key={item.link}>
+                <a href={item.link}>{item.text}</a>
+              </li>
+            ))}
+          </Navigation>
         </SideBar>
       )
     }}
