@@ -43,6 +43,15 @@ function Layout({ children }) {
       color: ${colour.black};
 		}
 
+    h1, h2, h3, h4, p, span, a, li {
+      &::selection {
+        background: ${colour.pale}; /* WebKit/Blink Browsers */
+      }
+      &::-moz-selection {
+        background: ${colour.pale}; /* Gecko Browsers */
+      }
+    }
+
     h1,
     h2,
     h3,
