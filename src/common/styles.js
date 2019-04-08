@@ -22,7 +22,7 @@ const space = {
 
 const images = {
   small: '2rem',
-  medium: '5rem',
+  medium: '4rem',
   large: '10rem'
 };
 
