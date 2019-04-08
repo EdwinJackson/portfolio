@@ -5,6 +5,7 @@ import Section from '../section';
 import Image from '../image';
 import { SectionHeader, Body, ItemHeader, ItemSubHeader } from '../text';
 import { format } from '../../utils/formatDate';
+import unwrap from '../../utils/unwrap';
 
 const ExperienceContainer = styled.div`
   margin-bottom: 2rem;
@@ -70,10 +71,9 @@ const Experience = () => (
       }    
     `} 
     render={({allContentfulExperience}) => {
-      // dig into the node object and flatten it
-      const experiences = allContentfulExperience.edges.map(({node}) => ({...node}));
+      const experiences = unwrap(allContentfulExperience);
       return (
-        <Section>
+        <Section id="experiences">
           <SectionHeader diminished>Experience</SectionHeader>
           {experiences.map(experience => (
             <ExperienceContainer key={experience.id}>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colour } from '../common/styles';
 
 const SectionHeader = styled.h2`
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-size: 1.5rem;
   color: ${props => props.diminished ? colour.diminishedBlack : colour.black };
 `;

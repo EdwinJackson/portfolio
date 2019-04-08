@@ -17,7 +17,7 @@ const About = () => (
       }
     `} 
     render={({contentfulPerson}) => (
-      <Section>
+      <Section id="about">
         <SectionHeader diminished>About</SectionHeader>
         <Body>{contentfulPerson.shortBio.childMarkdownRemark.rawMarkdownBody}</Body>
       </Section>

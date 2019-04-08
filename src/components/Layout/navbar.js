@@ -2,22 +2,25 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Image from '../image';
-import { space, colour } from '../../common/styles';
+import { space, colour, media } from '../../common/styles';
+import unwrap from '../../utils/unwrap';
 
 const SideBar = styled.nav`
   position: fixed;
-  width: 25vw;
-  max-width: 500px;
+  width: ${space.sidebar};
+  max-width: ${space.sidebarMax};
   height: 100vh;
   padding: 2rem;
 
-  @media (min-width: 1500px) {
+  ${media.desktopLarge} {
     margin-left: calc(40vw - 500px);
   }
 `;
 
 const Headshot = styled(Image)`
   display: block;
+  padding: 0.5rem;
+  border: solid 0.25rem ${colour.powder};
   border-radius: 50%;
   margin: 1rem auto;
   object-fit: cover;
@@ -104,7 +107,7 @@ const Navbar = () => (
     `}
     render={data => {
       const person = data.contentfulPerson;
-      const navitems = data.allContentfulNavigationItem.edges.map(({node}) => ({...node}));
+      const navitems = unwrap(data.allContentfulNavigationItem);
       return (
         <SideBar>
           <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
