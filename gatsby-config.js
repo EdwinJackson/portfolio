@@ -8,7 +8,7 @@ const { spaceId, accessToken } = process.env;
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby & Contentful Starter',
+    title: 'Edwin Jackson',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

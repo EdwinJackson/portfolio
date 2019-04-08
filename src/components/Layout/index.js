@@ -71,6 +71,7 @@ function Layout({ children }) {
         <>
           <Helmet title={data.site.siteMetadata.title}>
             <html lang="en" />
+            <link rel="icon" href="./code.png"/>
           </Helmet>
           <Navbar />
           <Divider />
