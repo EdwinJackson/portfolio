@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import Section from '../section';
 import { SectionHeader, Body, ItemHeader } from '../text';
 import Image from '../image';
+import unwrap from '../../utils/unwrap';
 
 const SkillContainer = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ const Skills = () => (
       }
     `}
     render={({allContentfulSkill}) => {
-      const skills = allContentfulSkill.edges.map(({node}) => ({...node}));
+      const skills = unwrap(allContentfulSkill);
       return (
         <Section id="skills">
           <SectionHeader diminished>Skills</SectionHeader>
