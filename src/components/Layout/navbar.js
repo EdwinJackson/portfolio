@@ -15,6 +15,12 @@ const SideBar = styled.nav`
   ${media.desktopLarge} {
     margin-left: calc(40vw - 500px);
   }
+
+  ${media.tablet} {
+    h1 {
+      display: none;
+    }
+  }
 `;
 
 const Headshot = styled(Image)`
@@ -25,6 +31,14 @@ const Headshot = styled(Image)`
   margin: 1rem auto;
   object-fit: cover;
   object-position: top;
+
+  ${media.tablet} {
+    position: fixed;
+    bottom: 2%;
+    right: 4%;
+    width: 4rem;
+    height: 4rem;
+  }
 `;
 
 const HeaderOne = styled.h1`
@@ -39,6 +53,10 @@ const Navigation = styled.ul`
   width: 100px;
   margin: 4rem auto;
   list-style-type: none;
+
+  ${media.tablet} {
+    display: none;
+  }
 
   li {
     position: relative;
