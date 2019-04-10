@@ -6,6 +6,11 @@ import { StaticQuery, graphql } from 'gatsby';
 import Navbar from './navbar';
 import { colour, media } from '../../common/styles';
 
+const SiteContainer = styled.div`
+  display: inline-block;
+  margin: 0 auto;
+`;
+
 const Content = styled.main`
   max-width: 700px;
   padding-top: 2rem;
@@ -15,6 +20,18 @@ const Content = styled.main`
 
   ${media.desktopSmall} {
     margin-left: 35vw;
+  }
+
+  ${media.desktopLarge} {
+    margin-left: calc(40vw + 2rem);
+  }
+
+  ${media.tablet} {
+    margin-left: 5vw;
+  }
+
+  ${media.mobile} {
+    margin-right: 0;
   }
 `;
 
@@ -27,6 +44,10 @@ const Divider = styled.div`
 
   ${media.desktopLarge} {
     margin-left: 40vw;
+  }
+
+  ${media.tablet} {
+    margin-left: 5vw;
   }
 `;
 
@@ -73,9 +94,11 @@ function Layout({ children }) {
             <html lang="en" />
             <link rel="icon" href="./code.png"/>
           </Helmet>
-          <Navbar />
-          <Divider />
-          <Content>{children}</Content>
+          <SiteContainer>
+            <Navbar />
+            <Divider />
+            <Content>{children}</Content>
+          </SiteContainer>
         </>
       )}
     />
