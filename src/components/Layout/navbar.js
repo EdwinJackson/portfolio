@@ -32,12 +32,17 @@ const Headshot = styled(Image)`
   object-fit: cover;
   object-position: top;
 
+  &:hover {
+    border-color: ${colour.pale};
+  }
+
   ${media.tablet} {
     position: fixed;
     bottom: 2%;
     right: 4%;
     width: 4rem;
     height: 4rem;
+    padding: 0.25rem;
   }
 `;
 
@@ -51,7 +56,7 @@ const HeaderOne = styled.h1`
 
 const Navigation = styled.ul`
   width: 100px;
-  margin: 4rem auto;
+  margin: 2rem auto 0;
   list-style-type: none;
 
   ${media.tablet} {
@@ -91,56 +96,104 @@ const Navigation = styled.ul`
   }
 `;
 
-const Navbar = () => (
-  <StaticQuery
-    query={graphql`
-    {
-      contentfulPerson(id: {eq: "3c56de93-d279-5889-8563-5298ad412080"}) {
-        name
-        title
-        email
-        phone
-        github
-        image {
-          description
-          file {
-            url
+const Social = styled.ul`
+  width: 100px;
+  margin: 3rem auto;
+  list-style-type: none;
+
+  ${media.tablet} {
+    display: none;
+  }
+
+  li {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+  }
+`;
+
+class Navbar extends React.Component {
+
+  render() {
+    return (
+      <StaticQuery
+        query={graphql`
+        {
+          contentfulPerson(id: {eq: "3c56de93-d279-5889-8563-5298ad412080"}) {
+            name
+            title
+            email
+            phone
+            github
+            image {
+              description
+              file {
+                url
+              }
+            }
+            shortBio {
+              childMarkdownRemark {
+                rawMarkdownBody
+              }
+            }
+          }
+          allContentfulNavigationItem(sort: {fields: createdAt, order: ASC}) {
+            edges {
+              node {
+                id
+                text
+                link
+              }
+            }
+          }
+          allContentfulSocial {
+            edges {
+              node {
+                id
+                icon
+                link
+                image {
+                  file {
+                    url
+                  }
+                }
+              }
+            }
           }
         }
-        shortBio {
-          childMarkdownRemark {
-            rawMarkdownBody
-          }
-        }
-      }
-      allContentfulNavigationItem(sort: {fields: createdAt, order: ASC}) {
-        edges {
-          node {
-            text
-            link
-          }
-        }
-      }
-    }
-    `}
-    render={data => {
-      const person = data.contentfulPerson;
-      const navitems = unwrap(data.allContentfulNavigationItem);
-      return (
-        <SideBar>
-          <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
-          <HeaderOne>{person.name}</HeaderOne>
-          <Navigation>
-            {navitems.map(item => (
-              <li key={item.link}>
-                <a href={item.link}>{item.text}</a>
-              </li>
-            ))}
-          </Navigation>
-        </SideBar>
-      )
-    }}
-   />
-)
+        `}
+        render={data => {
+          const person = data.contentfulPerson;
+          const navitems = unwrap(data.allContentfulNavigationItem);
+          const social = unwrap(data.allContentfulSocial);
+          return (
+            <SideBar>
+              <Headshot size="large" src={person.image.file.url} alt="Edwin" />
+              <HeaderOne>{person.name}</HeaderOne>
+              <Navigation>
+                {navitems.map(({ id, link, text }) => (
+                  <li key={id}>
+                    <a href={link}>{text}</a>
+                  </li>
+                ))}
+              </Navigation>
+              <Social>
+                {social.map(({ id, icon, image, link }) => (
+                  <li key={id}>
+                    <a href={link} target="_blank">
+                      <Image
+                        size="small"
+                        src={image.file.url}
+                        alt={icon} />
+                    </a>
+                  </li>
+                ))}
+              </Social>
+            </SideBar>
+          )
+        }}
+      />
+    )
+  }
+}
 
 export default Navbar;
