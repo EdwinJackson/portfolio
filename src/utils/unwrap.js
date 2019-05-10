@@ -1,6 +1,7 @@
 /**
- * Contentful returns objects in a deeply-nested object
- * this function will unwrap those objects into a more usuable format
+ * Contentful returns arrays of deeply-nested objects 
+ * this function will unwrap those objects 
+ * into a developer-friendly flatter format
  * @param {Object[]} contentfulCollection 
  */
 export default function unwrap(contentfulCollection) {
