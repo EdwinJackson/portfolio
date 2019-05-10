@@ -56,7 +56,7 @@ const HeaderOne = styled.h1`
 
 const Navigation = styled.ul`
   width: 100px;
-  margin: 4rem auto;
+  margin: 2rem auto 0;
   list-style-type: none;
 
   ${media.tablet} {
@@ -96,6 +96,21 @@ const Navigation = styled.ul`
   }
 `;
 
+const Social = styled.ul`
+  width: 100px;
+  margin: 3rem auto;
+  list-style-type: none;
+
+  ${media.tablet} {
+    display: none;
+  }
+
+  li {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+  }
+`;
+
 class Navbar extends React.Component {
 
   render() {
@@ -124,8 +139,23 @@ class Navbar extends React.Component {
           allContentfulNavigationItem(sort: {fields: createdAt, order: ASC}) {
             edges {
               node {
+                id
                 text
                 link
+              }
+            }
+          }
+          allContentfulSocial {
+            edges {
+              node {
+                id
+                icon
+                link
+                image {
+                  file {
+                    url
+                  }
+                }
               }
             }
           }
@@ -134,21 +164,34 @@ class Navbar extends React.Component {
         render={data => {
           const person = data.contentfulPerson;
           const navitems = unwrap(data.allContentfulNavigationItem);
+          const social = unwrap(data.allContentfulSocial);
           return (
             <SideBar>
-              <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
+              <Headshot size="large" src={person.image.file.url} alt="Edwin" />
               <HeaderOne>{person.name}</HeaderOne>
               <Navigation>
-                {navitems.map(item => (
-                  <li key={item.link}>
-                    <a href={item.link}>{item.text}</a>
+                {navitems.map(({ id, link, text }) => (
+                  <li key={id}>
+                    <a href={link}>{text}</a>
                   </li>
                 ))}
               </Navigation>
+              <Social>
+                {social.map(({ id, icon, image, link }) => (
+                  <li key={id}>
+                    <a href={link} target="_blank">
+                      <Image
+                        size="small"
+                        src={image.file.url}
+                        alt={icon} />
+                    </a>
+                  </li>
+                ))}
+              </Social>
             </SideBar>
           )
         }}
-       />
+      />
     )
   }
 }
