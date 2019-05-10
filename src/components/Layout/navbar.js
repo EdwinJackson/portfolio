@@ -32,12 +32,17 @@ const Headshot = styled(Image)`
   object-fit: cover;
   object-position: top;
 
+  &:hover {
+    border-color: ${colour.pale};
+  }
+
   ${media.tablet} {
     position: fixed;
     bottom: 2%;
     right: 4%;
     width: 4rem;
     height: 4rem;
+    padding: 0.25rem;
   }
 `;
 
@@ -91,56 +96,61 @@ const Navigation = styled.ul`
   }
 `;
 
-const Navbar = () => (
-  <StaticQuery
-    query={graphql`
-    {
-      contentfulPerson(id: {eq: "3c56de93-d279-5889-8563-5298ad412080"}) {
-        name
-        title
-        email
-        phone
-        github
-        image {
-          description
-          file {
-            url
+class Navbar extends React.Component {
+
+  render() {
+    return (
+      <StaticQuery
+        query={graphql`
+        {
+          contentfulPerson(id: {eq: "3c56de93-d279-5889-8563-5298ad412080"}) {
+            name
+            title
+            email
+            phone
+            github
+            image {
+              description
+              file {
+                url
+              }
+            }
+            shortBio {
+              childMarkdownRemark {
+                rawMarkdownBody
+              }
+            }
+          }
+          allContentfulNavigationItem(sort: {fields: createdAt, order: ASC}) {
+            edges {
+              node {
+                text
+                link
+              }
+            }
           }
         }
-        shortBio {
-          childMarkdownRemark {
-            rawMarkdownBody
-          }
-        }
-      }
-      allContentfulNavigationItem(sort: {fields: createdAt, order: ASC}) {
-        edges {
-          node {
-            text
-            link
-          }
-        }
-      }
-    }
-    `}
-    render={data => {
-      const person = data.contentfulPerson;
-      const navitems = unwrap(data.allContentfulNavigationItem);
-      return (
-        <SideBar>
-          <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
-          <HeaderOne>{person.name}</HeaderOne>
-          <Navigation>
-            {navitems.map(item => (
-              <li key={item.link}>
-                <a href={item.link}>{item.text}</a>
-              </li>
-            ))}
-          </Navigation>
-        </SideBar>
-      )
-    }}
-   />
-)
+        `}
+        render={data => {
+          const person = data.contentfulPerson;
+          const navitems = unwrap(data.allContentfulNavigationItem);
+          return (
+            <SideBar>
+              <Headshot size="large" src={person.image.file.url} alt="Edwin"/>
+              <HeaderOne>{person.name}</HeaderOne>
+              <Navigation>
+                {navitems.map(item => (
+                  <li key={item.link}>
+                    <a href={item.link}>{item.text}</a>
+                  </li>
+                ))}
+              </Navigation>
+            </SideBar>
+          )
+        }}
+       />
+    )
+  }
+}
 
 export default Navbar;
