@@ -45,7 +45,7 @@ const Experience = () => (
   <StaticQuery 
     query={graphql`
       {
-        allContentfulExperience {
+        allContentfulExperience(sort: {fields: startDate order: DESC}) {
           edges {
             node {
               id
