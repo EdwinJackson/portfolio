@@ -7,8 +7,11 @@ import Navbar from './navbar';
 import { colour, media } from '../../common/styles';
 
 const SiteContainer = styled.div`
-  display: inline-block;
   margin: 0 auto;
+
+  ${media.tablet} {
+    padding-bottom: 2rem;
+  }
 `;
 
 const Content = styled.main`
