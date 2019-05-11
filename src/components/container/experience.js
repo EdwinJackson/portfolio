@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
 import Section from '../section';
 import Image from '../image';
+import ContentSection from '../content-container';
 import { SectionHeader, Body, ItemHeader, ItemSubHeader } from '../text';
 import { format } from '../../utils/formatDate';
 import unwrap from '../../utils/unwrap';
+import { colour } from '../../common/styles';
 
-const ExperienceContainer = styled.div`
-  margin-bottom: 2rem;
+const ExperienceContainer = styled(ContentSection)`
+  &:hover {
+    background-color: ${colour.space}05;
+  }
 `;
 
 const CompanyInfo = styled.div`
@@ -45,7 +49,7 @@ const Experience = () => (
   <StaticQuery 
     query={graphql`
       {
-        allContentfulExperience {
+        allContentfulExperience(sort: {fields: startDate order: DESC}) {
           edges {
             node {
               id

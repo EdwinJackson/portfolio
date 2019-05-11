@@ -179,7 +179,7 @@ class Navbar extends React.Component {
               <Social>
                 {social.map(({ id, icon, image, link }) => (
                   <li key={id}>
-                    <a href={link} target="_blank">
+                    <a href={link} target="_blank" rel="noopener noreferrer">
                       <Image
                         size="small"
                         src={image.file.url}
