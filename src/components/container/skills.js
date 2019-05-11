@@ -5,10 +5,15 @@ import Section from '../section';
 import { SectionHeader, Body, ItemHeader } from '../text';
 import Image from '../image';
 import unwrap from '../../utils/unwrap';
+import ContentSection from '../content-container';
+import { colour } from '../../common/styles';
 
-const SkillContainer = styled.div`
+const SkillContainer = styled(ContentSection)`
   display: flex;
-  margin-bottom: 2rem;
+
+  &:hover {
+    background-color: ${colour.powder}12;
+  }
 `;
 
 const SkillIcon = styled.div`
