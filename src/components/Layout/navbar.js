@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import Image from '../image';
 import { space, colour, media, images } from '../../common/styles';
 import unwrap from '../../utils/unwrap';
+import X from '../x';
 
 const SideBar = styled.nav`
   position: fixed;
@@ -267,6 +268,9 @@ class Navbar extends React.Component {
                 alt="Edwin"
                 onClick={this.toggleNav}
                 open={this.state.isNavOpen} />
+              <X 
+                open={this.state.isNavOpen} 
+                onClick={this.toggleNav} />
               <HeaderOne>{person.name}</HeaderOne>
               <Navigation open={this.state.isNavOpen}>
                 {navitems.map(({ id, link, text }) => (
