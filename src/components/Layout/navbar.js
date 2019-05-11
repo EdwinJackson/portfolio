@@ -1,8 +1,8 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Image from '../image';
-import { space, colour, media } from '../../common/styles';
+import { space, colour, media, images } from '../../common/styles';
 import unwrap from '../../utils/unwrap';
 
 const SideBar = styled.nav`
@@ -17,8 +17,34 @@ const SideBar = styled.nav`
   }
 
   ${media.tablet} {
+    ${
+      props => props.open ? 
+        css`
+          background: ${colour.white};
+          width: 100%;
+          padding: 12rem 0 0;
+          animation-name: open;
+          animation-duration: 150ms;
+          animation-timing-function: linear;
+
+          @keyframes open {
+            0% {
+              width: 0%;
+            }
+            50% {
+              width: 100%;
+            }
+            75% {
+              padding: 2rem;
+            }
+            100% {
+              padding: 0;
+            }
+          }
+        ` : ``
+    }
     h1 {
-      display: none;
+      display: ${props => props.open ? 'block' : 'none'};      
     }
   }
 `;
@@ -40,9 +66,36 @@ const Headshot = styled(Image)`
     position: fixed;
     bottom: 2%;
     right: 4%;
-    width: 4rem;
-    height: 4rem;
+    width: ${images.medium};
+    height: ${images.medium};
     padding: 0.25rem;
+
+    ${
+      props => props.open ?
+        css`
+          animation-duration: 300ms;
+          animation-name: headshotSlide;
+          animation-timing-function: linear;
+          animation-fill-mode: forwards;
+
+          @keyframes headshotSlide {
+            from {
+              bottom: 2%;
+              right: 4%;
+              width: ${images.medium};
+              height: ${images.medium};
+            }
+
+            to {
+              top: 1rem;
+              left: 50%;
+              transform: translateX(-50%);
+              width: ${images.large};
+              height: ${images.large};
+            }
+          }
+        ` : ``
+    }
   }
 `;
 
@@ -61,6 +114,27 @@ const Navigation = styled.ul`
 
   ${media.tablet} {
     display: none;
+    ${
+      props => props.open ?
+        css`
+          display: block;
+          animation-name: open;
+          animation-timing-function: ease-out;
+          animation-duration: 450ms;
+
+          @keyframes open {
+            0% {
+              opacity: 0;
+            }
+            50% {
+              opacity: 0.5;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+        ` : ``
+    }
   }
 
   li {
@@ -69,6 +143,19 @@ const Navigation = styled.ul`
     font-family: 'Karla', sans-serif;
     font-size: 1.25;
     font-weight: bold;
+    animation-name: appear;
+    animation-delay: 150ms;
+    animation-duration: 300ms;
+    animation-timing-function: ease-in;
+
+    @keyframes appear {
+      from {
+        margin-top: -1rem;
+      }
+      to {
+        margin-top: unset;
+      }
+    }
 
     &::before {
       content: '';
@@ -102,7 +189,7 @@ const Social = styled.ul`
   list-style-type: none;
 
   ${media.tablet} {
-    display: none;
+    display: ${props => props.open ? 'block' : 'none'};
   }
 
   li {
@@ -112,6 +199,13 @@ const Social = styled.ul`
 `;
 
 class Navbar extends React.Component {
+  state = {
+    isNavOpen: false
+  }
+
+  toggleNav = () => {
+    this.setState({ isNavOpen: !this.state.isNavOpen });
+  }
 
   render() {
     return (
@@ -166,20 +260,29 @@ class Navbar extends React.Component {
           const navitems = unwrap(data.allContentfulNavigationItem);
           const social = unwrap(data.allContentfulSocial);
           return (
-            <SideBar>
-              <Headshot size="large" src={person.image.file.url} alt="Edwin" />
+            <SideBar open={this.state.isNavOpen}>
+              <Headshot 
+                size="large" 
+                src={person.image.file.url} 
+                alt="Edwin"
+                onClick={this.toggleNav}
+                open={this.state.isNavOpen} />
               <HeaderOne>{person.name}</HeaderOne>
-              <Navigation>
+              <Navigation open={this.state.isNavOpen}>
                 {navitems.map(({ id, link, text }) => (
                   <li key={id}>
                     <a href={link}>{text}</a>
                   </li>
                 ))}
               </Navigation>
-              <Social>
+              <Social open={this.state.isNavOpen}>
                 {social.map(({ id, icon, image, link }) => (
                   <li key={id}>
-                    <a href={link} target="_blank" rel="noopener noreferrer">
+                    <a 
+                      onClick={this.toggleNav}
+                      href={link} 
+                      target="_blank" 
+                      rel="noopener noreferrer">
                       <Image
                         size="small"
                         src={image.file.url}
