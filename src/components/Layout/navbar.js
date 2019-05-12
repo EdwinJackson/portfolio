@@ -23,9 +23,11 @@ const SideBar = styled.nav`
         css`
           background: ${colour.white};
           width: 100%;
-          padding: 12rem 0 0;
+          height: 100%;
+          padding: 0;
+          padding-top: 70%;
           animation-name: open;
-          animation-duration: 150ms;
+          animation-duration: 300ms;
           animation-timing-function: linear;
 
           @keyframes open {
@@ -85,14 +87,16 @@ const Headshot = styled(Image)`
               right: 4%;
               width: ${images.medium};
               height: ${images.medium};
+              opacity: 0;
             }
 
             to {
-              top: 1rem;
-              left: 50%;
+              top: 10%;
+              left: 52%;
               transform: translateX(-50%);
               width: ${images.large};
               height: ${images.large};
+              opacity: 1;
             }
           }
         ` : ``
@@ -106,6 +110,10 @@ const HeaderOne = styled.h1`
   font-size: 1.5rem;
   font-family: 'Karla', monospace;
   font-weight: bold;
+
+  ${media.tablet} {
+    margin-left: 3%;
+  }
 `;
 
 const Navigation = styled.ul`
@@ -118,10 +126,12 @@ const Navigation = styled.ul`
     ${
       props => props.open ?
         css`
-          display: block;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           animation-name: open;
           animation-timing-function: ease-out;
-          animation-duration: 450ms;
+          animation-duration: 750ms;
 
           @keyframes open {
             0% {
@@ -149,6 +159,10 @@ const Navigation = styled.ul`
     animation-duration: 300ms;
     animation-timing-function: ease-in;
 
+    ${media.tablet} {
+      margin-left: 1rem;
+    }
+
     @keyframes appear {
       from {
         margin-top: -1rem;
@@ -168,6 +182,12 @@ const Navigation = styled.ul`
       margin-bottom: -5px;
       background: ${colour.powder};
       transition: ease-in 100ms all;
+
+      ${media.tablet} {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2rem;
+      }
     }
 
     &:hover {
@@ -191,11 +211,17 @@ const Social = styled.ul`
 
   ${media.tablet} {
     display: ${props => props.open ? 'block' : 'none'};
+    margin: 1rem auto;
   }
 
   li {
     margin-bottom: 1.5rem;
     padding-left: 1rem;
+
+    ${media.tablet} {
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
 
@@ -274,7 +300,7 @@ class Navbar extends React.Component {
               <HeaderOne>{person.name}</HeaderOne>
               <Navigation open={this.state.isNavOpen}>
                 {navitems.map(({ id, link, text }) => (
-                  <li key={id}>
+                  <li key={id} onClick={this.toggleNav}>
                     <a href={link}>{text}</a>
                   </li>
                 ))}
