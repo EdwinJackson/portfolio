@@ -31,6 +31,7 @@ const Content = styled.main`
 
   ${media.tablet} {
     margin-left: 5vw;
+    margin-top: 0;
   }
 
   ${media.mobile} {
