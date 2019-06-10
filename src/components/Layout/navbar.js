@@ -206,7 +206,7 @@ const Navigation = styled.ul`
 
 const Social = styled.ul`
   width: 100px;
-  margin: 3rem auto;
+  margin: 2rem auto;
   list-style-type: none;
 
   ${media.tablet} {
@@ -215,7 +215,7 @@ const Social = styled.ul`
   }
 
   li {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     padding-left: 1rem;
 
     ${media.tablet} {
@@ -314,7 +314,7 @@ class Navbar extends React.Component {
                       target="_blank" 
                       rel="noopener noreferrer">
                       <Image
-                        size="small"
+                        size="xs"
                         src={image.file.url}
                         alt={icon} />
                     </a>

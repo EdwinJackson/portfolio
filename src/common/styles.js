@@ -21,6 +21,7 @@ const space = {
 };
 
 const images = {
+  xs: '1.5rem',
   small: '2rem',
   medium: '4rem',
   large: '10rem'
