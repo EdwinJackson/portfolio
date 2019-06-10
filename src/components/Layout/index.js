@@ -62,6 +62,7 @@ function Layout({ children }) {
 		body {
 			font-family: 'Inconsolata', monospace;
       color: ${colour.black};
+      background: #00000008;
 		}
 
     h1, h2, h3, h4, p, span, a, li {
